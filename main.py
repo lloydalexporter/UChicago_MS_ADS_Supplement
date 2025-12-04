@@ -12,15 +12,15 @@ print("Import Libraries - Done!")
 
 
 # *** CONSTANTS
-CSV_FILE_PATH = "weather.csv" # Path to the input CSV file
-STATION_CODE = "ORD"          # Weather station code for Chicago ;)
+CSV_FILE_PATH = "weather.csv" # Path to the input CSV file https://corgis-edu.github.io/corgis/csv/weather/
+STATION_CODE = "ORD"          # Weather station code for Chicago ;) 
 
 
 
 def graph_precipitation(data):
   plt.figure(figsize=(10,5))
   plt.plot(data['Date.Full'], data['Data.Precipitation'], marker='o', linestyle='-')
-  plt.title('Daily Precipitation in', )
+  plt.title(f'Daily Precipitation in {STATION_CODE}')
   plt.xlabel('Date')
   plt.ylabel('Precipitation (Inches)')
   plt.grid(True)
@@ -71,7 +71,7 @@ def main():
 
   preview_table(station_data)
   
-  graph_precipitation(processed_data)
+  graph_precipitation(station_data)
   
   
 if __name__ == "__main__":
