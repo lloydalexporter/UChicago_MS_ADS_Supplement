@@ -2,14 +2,14 @@
 
 #!> Import libraries
 import csv
+import pandas as pd
 from time import sleep
 from pprint import pprint
 print("Import Libraries - Done!")
 
 
 # *** CONSTANTS
-CSV_FILE_PATH = "people-2000000.csv"  # https://github.com/datablist/sample-csv-files
-CSV_FILE_PATH = "people-100.csv"      # https://github.com/datablist/sample-csv-files
+CSV_FILE_PATH = "weather.csv" # Path to the input CSV file
 
 
 
@@ -20,24 +20,17 @@ def process_csv(raw_data, headers):
   
   for row in raw_data:
     for i in range(len(headers)):
-      
-
-def read_csv():  
-  
-  with open(CSV_FILE_PATH, newline='', encoding='utf-8') as csvfile:
-    raw_data = list(csv.reader(csvfile))
-  
-  return raw_data
-
-
+      pass
 
 
 def main():
 
-  raw_data = read_csv()
-  headers = raw_data.pop(0)
+  raw_data = pd.read_csv(CSV_FILE_PATH)
+  headers = raw_data.columns.tolist()  
+  print(headers)
   
-  processed_data = process_csv(raw_data, headers)
+  
+  #processed_data = process_csv(raw_data, headers)
   
   
   
