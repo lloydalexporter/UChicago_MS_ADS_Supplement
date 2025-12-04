@@ -12,26 +12,32 @@ print("Import Libraries - Done!")
 CSV_FILE_PATH = "weather.csv" # Path to the input CSV file
 
 
+def preview_table(data, num_rows=5):
+  print(f'\n' * 3)
+  pprint(data.head(num_rows))
+  print(data.dtypes)
+
 
 
 def process_csv(raw_data, headers):
   
-  processed_data = []
+  raw_data["Date.Full"] = pd.to_datetime(raw_data["Date.Full"])
   
-  for row in raw_data:
-    for i in range(len(headers)):
-      pass
+  return raw_data
 
 
 def main():
 
+  # !> Ingest data from CSV 
   raw_data = pd.read_csv(CSV_FILE_PATH)
-  headers = raw_data.columns.tolist()  
-  print(headers)
+  headers = raw_data.columns.tolist()
   
+  preview_table(raw_data)
   
-  #processed_data = process_csv(raw_data, headers)
+  # !> Manager different data types
+  processed_data = process_csv(raw_data, headers)
   
+  preview_table(processed_data)
   
   
   
