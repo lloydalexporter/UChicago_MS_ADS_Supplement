@@ -57,6 +57,20 @@ def main():
   
   preview_table(processed_data)
   
+  station_data = processed_data[processed_data['Station.Code'] == STATION_CODE].copy()
+  
+  group_columns = ['Date.Full','Station.Code','Station.Location']
+  aggregate = {
+    'Data.Precipitation': 'sum',
+    'Data.Temperature.Avg Temp': 'mean',
+    'Data.Temperature.Max Temp': 'max',
+    'Data.Temperature.Min Temp': 'min'
+  }
+  
+  station_data = station_data.groupby(group_columns).agg(aggregate).reset_index()
+
+  preview_table(station_data)
+  
   graph_precipitation(processed_data)
   
   
