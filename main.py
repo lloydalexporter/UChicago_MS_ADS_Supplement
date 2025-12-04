@@ -1,5 +1,9 @@
 #!/bin/env python3
 
+#
+# https://github.com/lloydalexporter/UChicago_MS_ADS_Supplement
+#
+
 #!> Import libraries
 import csv
 import pandas as pd
@@ -17,6 +21,7 @@ STATION_CODE = "ORD"          # Weather station code for Chicago ;)
 
 
 
+
 def graph_precipitation(data):
   plt.figure(figsize=(10,5))
   plt.plot(data['Date.Full'], data['Data.Precipitation'], marker='o', linestyle='-')
@@ -25,6 +30,27 @@ def graph_precipitation(data):
   plt.ylabel('Precipitation (Inches)')
   plt.grid(True)
   plt.show()
+
+
+def analyse_station_data(station_data):
+  
+  print(f"\nAnalysis for Station: {STATION_CODE}")
+  
+  num_days = len(station_data)
+  total_precipitation = station_data['Data.Precipitation'].sum() 
+  avg_precipitation = station_data['Data.Precipitation'].mean()
+  max_precipitation = station_data['Data.Precipitation'].max()
+  min_precipitation = station_data['Data.Precipitation'].min()
+  
+  avg_temp = station_data['Data.Temperature.Avg Temp'].mean()
+  max_temp = station_data['Data.Temperature.Max Temp'].max()
+  min_temp = station_data['Data.Temperature.Min Temp'].min()
+  
+  print(f"Total Precipitation: {total_precipitation} inches over {num_days} days")
+  print(f"Max ({max_precipitation}) | Avg ({avg_precipitation}) | Min ({min_precipitation}) Precipitation")
+  
+  print("Temperature Analysis:")
+  print(f"Max ({max_temp}) | Avg ({avg_temp}) | Min ({min_temp})")
 
 
 def preview_table(data, num_rows=5):
@@ -70,6 +96,10 @@ def main():
   station_data = station_data.groupby(group_columns).agg(aggregate).reset_index()
 
   preview_table(station_data)
+  
+  
+  analyse_station_data(station_data)
+  
   
   graph_precipitation(station_data)
   
