@@ -18,10 +18,13 @@ def preview_table(data, num_rows=5):
   print(data.dtypes)
 
 
-
 def process_csv(raw_data, headers):
   
+  # Format the dates and separate into components
   raw_data["Date.Full"] = pd.to_datetime(raw_data["Date.Full"])
+  raw_data["Date.Month"] = raw_data["Date.Full"].dt.month
+  raw_data["Date.Day"] = raw_data["Date.Full"].dt.day
+  raw_data["Date.Year"] = raw_data["Date.Full"].dt.year
   
   return raw_data
 
