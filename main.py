@@ -5,14 +5,11 @@
 #
 
 #!> Import libraries
-import csv
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from time import sleep
 from pprint import pprint
-
-print("Import Libraries - Done!")
 
 
 # *** CONSTANTS
@@ -21,7 +18,7 @@ STATION_CODE = "ORD"          # Weather station code for Chicago ;)
 
 
 
-
+# !> Visualise data
 def graph_precipitation(data):
   plt.figure(figsize=(10,5))
   plt.plot(data['Date.Full'], data['Data.Precipitation'], marker='o', linestyle='-')
@@ -31,9 +28,8 @@ def graph_precipitation(data):
   plt.grid(True)
   plt.show()
 
-
+# !> Use your function for data analysis
 def analyse_station_data(station_data):
-  
   print(f"\nAnalysis for Station: {STATION_CODE}")
   
   num_days = len(station_data)
@@ -59,8 +55,8 @@ def preview_table(data, num_rows=5):
   print(data.dtypes)
 
 
-def process_csv(raw_data, headers):
-  
+# !> Manage different data types
+def process_csv(raw_data):
   # Format the dates and separate into components
   raw_data["Date.Full"] = pd.to_datetime(raw_data["Date.Full"])
   raw_data["Date.Month"] = raw_data["Date.Full"].dt.month
@@ -75,16 +71,14 @@ def main():
   # !> Ingest data from CSV 
   raw_data = pd.read_csv(CSV_FILE_PATH)
   headers = raw_data.columns.tolist()
-  
   preview_table(raw_data)
   
-  # !> Manager different data types
-  processed_data = process_csv(raw_data, headers)
-  
+  # !> Manage different data types
+  processed_data = process_csv(raw_data)
   preview_table(processed_data)
   
+  # !> Wrangle data
   station_data = processed_data[processed_data['Station.Code'] == STATION_CODE].copy()
-  
   group_columns = ['Date.Full','Station.Code','Station.Location']
   aggregate = {
     'Data.Precipitation': 'sum',
@@ -92,15 +86,10 @@ def main():
     'Data.Temperature.Max Temp': 'max',
     'Data.Temperature.Min Temp': 'min'
   }
-  
   station_data = station_data.groupby(group_columns).agg(aggregate).reset_index()
 
   preview_table(station_data)
-  
-  
   analyse_station_data(station_data)
-  
-  
   graph_precipitation(station_data)
   
   
