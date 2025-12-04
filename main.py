@@ -46,11 +46,11 @@ def analyse_station_data(station_data):
   max_temp = station_data['Data.Temperature.Max Temp'].max()
   min_temp = station_data['Data.Temperature.Min Temp'].min()
   
-  print(f"Total Precipitation: {total_precipitation} inches over {num_days} days")
-  print(f"Max ({max_precipitation}) | Avg ({avg_precipitation}) | Min ({min_precipitation}) Precipitation")
+  print(f"Total Precipitation: {total_precipitation:.2f} inches over {num_days} days")
+  print(f"Max ({max_precipitation:.2f}) | Avg ({avg_precipitation:.2f}) | Min ({min_precipitation:.2f}) Precipitation")
   
-  print("Temperature Analysis:")
-  print(f"Max ({max_temp}) | Avg ({avg_temp}) | Min ({min_temp})")
+  print("Temperature Analysis (*F):")
+  print(f"Max ({max_temp:.2f}) | Avg ({avg_temp:.2f}) | Min ({min_temp:.2f})")
 
 
 def preview_table(data, num_rows=5):
