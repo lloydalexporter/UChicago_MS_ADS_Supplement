@@ -3,8 +3,11 @@
 #!> Import libraries
 import csv
 import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
 from time import sleep
 from pprint import pprint
+
 print("Import Libraries - Done!")
 
 
@@ -13,15 +16,21 @@ CSV_FILE_PATH = "weather.csv" # Path to the input CSV file
 STATION_CODE = "ORD"          # Weather station code for Chicago ;)
 
 
+
+def graph_precipitation(data):
+  plt.figure(figsize=(10,5))
+  plt.plot(data['Date.Full'], data['Data.Precipitation'], marker='o', linestyle='-')
+  plt.title('Daily Precipitation in', )
+  plt.xlabel('Date')
+  plt.ylabel('Precipitation (Inches)')
+  plt.grid(True)
+  plt.show()
+
+
 def preview_table(data, num_rows=5):
   print(f'\n' * 3)
   pprint(data.head(num_rows))
   print(data.dtypes)
-
-
-
-
-
 
 
 def process_csv(raw_data, headers):
@@ -48,6 +57,7 @@ def main():
   
   preview_table(processed_data)
   
+  graph_precipitation(processed_data)
   
   
 if __name__ == "__main__":
