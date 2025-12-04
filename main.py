@@ -10,12 +10,18 @@ print("Import Libraries - Done!")
 
 # *** CONSTANTS
 CSV_FILE_PATH = "weather.csv" # Path to the input CSV file
+STATION_CODE = "ORD"          # Weather station code for Chicago ;)
 
 
 def preview_table(data, num_rows=5):
   print(f'\n' * 3)
   pprint(data.head(num_rows))
   print(data.dtypes)
+
+
+
+
+
 
 
 def process_csv(raw_data, headers):
