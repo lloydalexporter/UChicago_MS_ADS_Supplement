@@ -22,7 +22,7 @@ STATION_CODE = "ORD"          # Weather station code for Chicago ;)
 def graph_precipitation(data):
   plt.figure(figsize=(10,5))
   plt.plot(data['Date.Full'], data['Data.Precipitation'], marker='o', linestyle='-')
-  plt.title(f'Daily Precipitation in {STATION_CODE}')
+  plt.title(f'Precipitation in {STATION_CODE}')
   plt.xlabel('Date')
   plt.ylabel('Precipitation (Inches)')
   plt.grid(True)
